@@ -39,7 +39,9 @@ public class SanityController : MonoBehaviour {
 		}
 
 		//Rowen being shit
-		myTransform.localScale = new Vector3 (sanityLevel/19,4,1);
-
+		if (sanityLevel >= 0) 
+		{
+			myTransform.localScale = new Vector3 (sanityLevel / 37, 1.8f, 1);
+		}
 	}
 }
