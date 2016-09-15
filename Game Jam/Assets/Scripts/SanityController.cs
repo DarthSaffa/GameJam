@@ -4,11 +4,10 @@ using System.Collections;
 
 public class SanityController : MonoBehaviour {
 
-	public Slider sanitySlider;
 	public float sanityLevel = 100;
 	float insanityTimer;
 	public float insanityMultiplier = 0;
-	float darknessLevel;
+	public static float darknessLevel = 0;
 	public static bool isTakingDamage;
 	Transform myTransform;
 
@@ -23,7 +22,7 @@ public class SanityController : MonoBehaviour {
 	void Update () 
 	{
 		//darknessLevel maximum is 10, once it hits 7 you start to lose sanity based on the light level
-		if (darknessLevel <= 7)
+		if (darknessLevel >= 7)
 		{
 			//isTakingDamage will most likely have a screen dark flash this variable can control this
 			isTakingDamage = true;
@@ -34,10 +33,13 @@ public class SanityController : MonoBehaviour {
 		insanityTimer = insanityTimer + Time.deltaTime;
 
 		//Insanity Multiplier divides from timer after 5 mins = 300 seconds
-		if (insanityTimer <= 300) 
+		if (insanityTimer >= 300) 
 		{
 			insanityMultiplier = insanityTimer / 100;
 		}
-		myTransform.position = new Vector3 ();
+
+		//Rowen being shit
+		myTransform.localScale = new Vector3 (sanityLevel/19,4,1);
+
 	}
 }
