@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/characterTest.unity
+- path: Assets/Scenes/sanityTest.unity
   isLoaded: 1
   isActive: 1

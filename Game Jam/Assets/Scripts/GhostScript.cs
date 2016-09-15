@@ -12,6 +12,7 @@ public class GhostScript : MonoBehaviour {
 	Vector3 dontSpawnGhostsHere;
 	float spawnRate = 0.5f;
 	float nextSpawn = 0;
+	float lightLevel;
 
 
 
@@ -25,14 +26,23 @@ public class GhostScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		dontSpawnGhostsHere = new Vector3 (this.gameObject.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+		lightLevel = Match.matchLightLevel / 25;
+		dontSpawnGhostsHere = new Vector3 (this.gameObject.transform.position.x + lightLevel, this.gameObject.transform.position.y + lightLevel, this.gameObject.transform.position.z + lightLevel);
 			
+
 		if(Time.time > nextSpawn)
 		{
 			nextSpawn = Time.time + spawnRate;
 			spawnPosition = new Vector3 (Random.insideUnitSphere.x * 40f + this.gameObject.transform.position.x, Random.Range(-15f, 15f) + this.gameObject.transform.position.y ,Random.insideUnitSphere.z * 40f + + this.gameObject.transform.position.z);
 
-			Instantiate (Ghost, spawnPosition, Quaternion.identity);
+			if (spawnPosition.x < dontSpawnGhostsHere.x || spawnPosition.y < dontSpawnGhostsHere.y || spawnPosition.z < dontSpawnGhostsHere.z) 
+			{			
+				spawnPosition = new Vector3 (Random.insideUnitSphere.x * 40f + this.gameObject.transform.position.x, Random.Range (-15f, 15f) + this.gameObject.transform.position.y, Random.insideUnitSphere.z * 40f + +this.gameObject.transform.position.z);
+			} 
+			else 
+			{
+				Instantiate (Ghost, spawnPosition, Quaternion.identity);
+			}
 		}
 
 	}
