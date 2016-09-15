@@ -6,24 +6,22 @@ public class SanityController : MonoBehaviour {
 
 	public Slider sanitySlider;
 	public float sanityLevel = 100;
-	public float sanityMax = 100;
 	float insanityTimer;
 	public float insanityMultiplier = 0;
 	float darknessLevel;
 	public static bool isTakingDamage;
+	Transform myTransform;
 
 
 	// Use this for initialization
 	void Start () 
 	{
-		
+		myTransform = transform;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		
-
 		//darknessLevel maximum is 10, once it hits 7 you start to lose sanity based on the light level
 		if (darknessLevel <= 7)
 		{
@@ -40,7 +38,6 @@ public class SanityController : MonoBehaviour {
 		{
 			insanityMultiplier = insanityTimer / 100;
 		}
-				
-
+		myTransform.position = new Vector3 ();
 	}
 }
